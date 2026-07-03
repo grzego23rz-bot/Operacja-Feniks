@@ -1,16 +1,103 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Marcel — Operacja Feniks</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="app"><header><span class="badge">PASZPORT ZWERYFIKOWANY</span><h1>Marcel</h1><p><b>Strateg</b> • Numer: OF-003</p></header>
-<section class="card"><h2>Status misji: AKTYWNA</h2><p>Strateg pomaga drużynie myśleć, wybierać i nie poddawać się.</p><p><b>Nie wszystko zostanie ujawnione od razu.</b></p></section>
-<section class="status"><div class="stat"><div>Monety Feniksa</div><div class="big" id="coins">0</div><div>/ 40</div></div><div class="stat"><div>Pieczęcie</div><div class="big" id="stamps">0</div><div>/ 12</div></div></section>
-<section class="card"><h2>Tajna misja osobista</h2><p>Pomóż młodszemu bratu w jednej trudnej sytuacji, nie mówiąc nikomu, że to Twoja tajna misja.</p></section>
-<section class="card"><h2>Dodaj postęp</h2><label>Monety: <input id="coinInput" type="number" min="0" max="40" value="0"></label> <label>Pieczęcie: <input id="stampInput" type="number" min="0" max="12" value="0"></label><button onclick="saveProgress()">Zapisz postęp</button></section>
-<section class="card"><h2>Misja dnia</h2><p id="dailyMission">Kliknij przycisk, aby odblokować wiadomość.</p><button onclick="unlockMission()">Odblokuj wiadomość Feniksa</button></section>
-<section class="card"><h2>Tajna nagroda</h2><p>Dostęp po zdobyciu 40 Monet Feniksa.</p><p id="reward"></p></section>
-<p class="footer">Kroniki Feniksa • Edycja I • Mandoria 2026</p></main>
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marcel — Operacja Feniks</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <section class="top">
+    <span class="badge">PASZPORT ZWERYFIKOWANY</span>
+    <div class="phoenix">🦅</div>
+    <h1>Marcel</h1>
+    <p><b>Strateg</b> • Numer agenta: <b>OF-003</b></p>
+  </section>
+
+  <section class="content">
+    <div class="card alert">
+      <h2>Status misji: AKTYWNA</h2>
+      <p>Agencie Marcelu, drużyna potrzebuje Twojego sprytu, spokoju i odpowiedzialności.</p>
+      <p><b>Nie wszystko zostanie ujawnione od razu.</b> To, co Was czeka, pozostaje tajemnicą.</p>
+    </div>
+
+    <div class="row">
+      <div class="stat">
+        <div>Monety Feniksa</div>
+        <div class="big" id="coins">0</div>
+        <div>/ 40</div>
+      </div>
+      <div class="stat">
+        <div>Pieczęcie</div>
+        <div class="big" id="stamps">0</div>
+        <div>/ 12</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Postęp do tajnej nagrody</h2>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <p id="rewardText">Tajna nagroda odblokuje się po zdobyciu 40 monet.</p>
+    </div>
+
+    <div class="card">
+      <h2>Tajna misja osobista</h2>
+      <p>Pomóż młodszemu bratu w jednej trudnej sytuacji, nie mówiąc nikomu, że to Twoja tajna misja.</p>
+    </div>
+
+    <div class="card">
+      <h2>Dodaj postęp</h2>
+      <p>Wynik zapisuje się tylko na tym telefonie.</p>
+      <label>Monety: <input id="coinInput" type="number" min="0" max="40" value="0"></label>
+      <label> Pieczęcie: <input id="stampInput" type="number" min="0" max="12" value="0"></label>
+      <button onclick="saveProgress()">Zapisz postęp</button>
+    </div>
+
+    <div class="card">
+      <h2>Pieczęcie agenta</h2>
+      <div class="stamps" id="stampView">□□□□□□□□□□□□</div>
+    </div>
+
+    <div class="card">
+      <h2>Wiadomość Feniksa</h2>
+      <p id="dailyMission">Kliknij przycisk, aby odblokować wiadomość.</p>
+      <button onclick="unlockMission()">Odblokuj wiadomość</button>
+    </div>
+
+    <a class="button" href="index.html">Powrót do strony głównej</a>
+  </section>
+
+  <div class="footer">Kroniki Feniksa • Edycja I • Mandoria 2026</div>
+</main>
+
 <script>
 const slug="marcel";
-function load(){const data=JSON.parse(localStorage.getItem("feniks_"+slug)||'{"coins":0,"stamps":0}');coins.textContent=data.coins;stamps.textContent=data.stamps;coinInput.value=data.coins;stampInput.value=data.stamps;if(data.coins>=40)reward.textContent="TAJNA NAGRODA ODBLOKOWANA. Zgłoś się do Dowódcy Grzegorza.";}
-function saveProgress(){const c=Math.max(0,Math.min(40,parseInt(coinInput.value||0)));const s=Math.max(0,Math.min(12,parseInt(stampInput.value||0)));localStorage.setItem("feniks_"+slug,JSON.stringify({coins:c,stamps:s}));load();}
-function unlockMission(){dailyMission.textContent="Wiadomość Feniksa: dzisiaj szukaj chwili, którą zapamiętasz.";}
+const key="feniks_v2_"+slug;
+function load(){
+  const data=JSON.parse(localStorage.getItem(key)||'{"coins":0,"stamps":0}');
+  coins.textContent=data.coins;
+  stamps.textContent=data.stamps;
+  coinInput.value=data.coins;
+  stampInput.value=data.stamps;
+  bar.style.width=Math.min(100,(data.coins/40)*100)+"%";
+  stampView.textContent="■".repeat(data.stamps)+"□".repeat(12-data.stamps);
+  if(data.coins>=40){
+    rewardText.textContent="TAJNA NAGRODA ODBLOKOWANA. Zgłoś się do Dowódcy Grzegorza.";
+  } else {
+    rewardText.textContent="Brakuje jeszcze "+(40-data.coins)+" monet do tajnej nagrody.";
+  }
+}
+function saveProgress(){
+  const c=Math.max(0,Math.min(40,parseInt(coinInput.value||0)));
+  const s=Math.max(0,Math.min(12,parseInt(stampInput.value||0)));
+  localStorage.setItem(key,JSON.stringify({coins:c,stamps:s}));
+  load();
+}
+function unlockMission(){
+  dailyMission.textContent="Wiadomość Feniksa: dzisiaj szukaj nie tylko atrakcji, ale chwili, którą zapamiętasz na długo.";
+}
 load();
-</script></body></html>
+</script>
+</body>
+</html>
