@@ -1,0 +1,9 @@
+body{margin:0;background:#1d120a;color:#2e1d10;font-family:Georgia,serif;padding:18px}
+.app{max-width:820px;margin:auto;background:#ead5a3;border:7px double #5b3718;border-radius:22px;padding:22px;box-shadow:0 20px 45px #0008}
+header{text-align:center;border-bottom:3px solid #7d5321;padding-bottom:16px;margin-bottom:18px}
+.badge{display:inline-block;padding:8px 14px;border:2px solid #d6a33a;border-radius:999px;background:#3a2414;color:#f8e6b8;font-weight:bold}
+h1{text-transform:uppercase;font-size:2.2rem;margin:14px 0 8px}
+h2{color:#8d2d1e}.card{background:#fff3c9aa;border:2px solid #8a6230;border-radius:18px;padding:18px;margin:14px 0}
+.status{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{text-align:center;border:2px solid #7d5321;border-radius:14px;padding:14px;background:#fff3c9}
+.big{font-size:2rem;font-weight:bold;color:#8d2d1e}.button,button{display:block;width:100%;text-align:center;background:linear-gradient(#d9a33a,#9a641d);color:#21150d;font-weight:bold;padding:15px;border:0;border-radius:14px;text-decoration:none;margin:10px 0;font-size:1.05rem}
+input{font-size:1.2rem;padding:8px;width:80px}.footer{text-align:center;color:#5e3b1d;margin-top:20px}@media(max-width:650px){.status{grid-template-columns:1fr}h1{font-size:1.7rem}}
