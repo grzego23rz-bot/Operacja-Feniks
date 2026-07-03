@@ -1,0 +1,15 @@
+
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:10px;font-family:Georgia,serif;color:#2e1d10;background:radial-gradient(circle at top,#573922,#120b07)}
+.app{max-width:920px;margin:auto;border:6px double #5a3618;border-radius:22px;background:linear-gradient(135deg,#f4ddb0,#dfbd77);box-shadow:0 18px 45px #0009;overflow:hidden}
+.top{text-align:center;padding:22px 14px;border-bottom:3px solid #7d5321}
+.badge{display:inline-block;padding:8px 14px;border:2px solid #d8a339;border-radius:999px;background:#2b190d;color:#ffe9ad;font-weight:bold}
+.phoenix{width:90px;height:90px;margin:14px auto 8px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#ffe27b,#b87922 58%,#3a2110 61%);box-shadow:0 0 30px #d8a339;font-size:46px;animation:glow 2s infinite alternate}
+@keyframes glow{from{box-shadow:0 0 12px #d8a339}to{box-shadow:0 0 40px #ffd36b}}
+h1{margin:8px 0 6px;font-size:2.1rem;text-transform:uppercase}h2{color:#8d2d1e}
+.content{padding:16px}.card{background:#fff4cbbb;border:2px solid #8a6230;border-radius:18px;padding:16px;margin:14px 0}.alert{border-left:8px solid #8d2d1e}
+.grid,.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{text-align:center;background:#fff3c9;border:2px solid #7d5321;border-radius:16px;padding:14px}
+.big{font-size:2.2rem;font-weight:bold;color:#8d2d1e}.progress{height:20px;background:#d7bd7b;border:2px solid #6a461f;border-radius:99px;overflow:hidden}.bar{height:100%;width:0%;background:linear-gradient(90deg,#9a641d,#ffd36b)}
+button,.button{width:100%;display:block;text-align:center;border:0;border-radius:15px;padding:15px;margin:10px 0;font-weight:bold;font-size:1.05rem;text-decoration:none;color:#21150d;background:linear-gradient(#ffd36b,#b87922);box-shadow:0 5px 0 #5b3718}
+input,textarea{width:100%;padding:10px;border:2px solid #7d5321;border-radius:10px;background:#fff8df;margin:6px 0}.mission{display:flex;gap:12px}.ico{font-size:2rem;min-width:42px}.done{opacity:.55;text-decoration:line-through}.stamps{font-size:1.4rem;letter-spacing:.12em}.footer{text-align:center;color:#5e3b1d;padding:16px}
+@media(max-width:650px){.grid,.row{grid-template-columns:1fr}h1{font-size:1.6rem}.app{border-width:4px}}
